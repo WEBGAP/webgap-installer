@@ -75,7 +75,7 @@ if [[ "$osrelease" == '"rocky"' ]]; then
         read gcp
         
         if [[ "$gcp" == "no" || "$gcp" == "n" ]]; then
-        firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address="$ip" accept"; firewall-cmd --reload
+        firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address="$ip" accept"; firewall-cmd --permanent --zone=public --remove-service=cockpit; firewall-cmd --reload
         fi
 
         #restart snapd service for proper seeding before installation of certbot
