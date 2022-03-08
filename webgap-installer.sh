@@ -7,7 +7,7 @@ fi
 
 osrelease=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
 
-if [[ "$osrelease" == "rocky" ]]; then
+if [[ "$osrelease" == '"rocky"' ]]; then
 
     echo -e "\e[0;33mAre you deploying in a virtual private cloud or DMZ (yes/no)?\033[0m "
     read answer
