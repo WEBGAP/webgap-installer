@@ -71,7 +71,7 @@ if [[ "$osrelease" == '"rocky"' ]]; then
         read ip
 
         #GCP sets the trusted zone active which accepts all packets, no rules needed
-        echo -n -e "\e[0;33mAre you deploying in Google Cloud Platform (yes/no)?\033[0m "
+        echo -n -e "\e[0;33mAre you deploying in Google Cloud Platform or Digital Ocean (yes/no)?\033[0m "
         read gcp
         
         if [[ "$gcp" == "no" || "$gcp" == "n" ]]; then
