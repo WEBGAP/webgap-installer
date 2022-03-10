@@ -71,10 +71,10 @@ if [[ "$osrelease" == '"rocky"' ]]; then
         read ip
 
         #GCP sets the trusted zone active which accepts all packets, no rules needed
-        echo -n -e "\e[0;33mAre you deploying in Google Cloud Platform or Digital Ocean (yes/no)?\033[0m "
-        read gcp
+        echo -n -e "\e[0;33mIs your firewall active zone the Trusted zone (yes/no)?\033[0m "
+        read fw
         
-        if [[ "$gcp" == "no" || "$gcp" == "n" ]]; then
+        if [[ "$fw" == "no" || "$fw" == "n" ]]; then
         firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address="$ip" accept"; firewall-cmd --permanent --zone=public --remove-service=cockpit; firewall-cmd --reload
         fi
 
@@ -382,10 +382,10 @@ else
         read ip
 
         #GCP sets the trusted zone active which accepts all packets, no rules needed
-        echo -n -e "\e[0;33mAre you deploying in Google Cloud Platform (yes/no)?\033[0m "
-        read gcp
+        echo -n -e "\e[0;33mIs your firewall active zone the Trusted zone (yes/no)?\033[0m "
+        read fw
         
-        if [[ "$gcp" == "no" || "$gcp" == "n" ]]; then
+        if [[ "$fw" == "no" || "$fw" == "n" ]]; then
         firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address="$ip" accept"; firewall-cmd --reload
         fi
 
