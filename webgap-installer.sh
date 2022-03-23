@@ -169,7 +169,7 @@ if [[ "$osrelease" == '"rocky"' ]]; then
         #restart server
         echo -e "\e[0;33mThe server is going to restart in 30 seconds.\033[0m"
         sleep 30s
-        shutdown -r now
+        reboot
     else
         #upgrade operating system
         yum makecache
@@ -316,7 +316,7 @@ if [[ "$osrelease" == '"rocky"' ]]; then
         #restart server
         echo -e "\e[0;33mThe server is going to restart in 30 seconds.\033[0m"
         sleep 30s
-        shutdown -r now
+        reboot
     fi
 else
 
@@ -480,7 +480,7 @@ else
         #restart server
         echo -e "\e[0;33mThe server is going to restart in 30 seconds.\033[0m"
         sleep 30s
-        shutdown -r now
+        reboot
     else
         #upgrade operating system
         yum makecache fast
@@ -630,6 +630,6 @@ else
         #restart server
         echo -e "\e[0;33mThe server is going to restart in 30 seconds.\033[0m"
         sleep 30s
-        shutdown -r now
+        reboot
     fi
 fi
