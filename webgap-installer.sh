@@ -1,12 +1,15 @@
 #!/bin/sh
 
+#checks to see if the script was run as root
 if [ $(id -u) != 0 ]; then
     echo "$(tput setaf 3)This script must be run as root.$(tput setaf 9)" 
     exit 1
 fi
 
+#gets the operating system ID and saves as the variable osrelease
 osrelease=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
 
+#if the operating system ID isn't rocky nor centos the script exits after displaying a message
 if [ $osrelease != '"rocky"' ] && [ $osrelease != '"centos"' ]; then
     echo "$(tput setaf 3)Please install on CentOS 7 or Rocky 8. You are trying to install on $(tput bold)$osrelease.$(tput setaf 9)"
 
@@ -14,11 +17,13 @@ if [ $osrelease != '"rocky"' ] && [ $osrelease != '"centos"' ]; then
     exit 1
 fi
 
+#if the operating system ID is rocky you get these commands and questions
 if [ $osrelease == '"rocky"' ]; then
 
     echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9) "
     read answer
 
+    #checks for answer spelling; if spelling is incorrect the operator is informed and given another chance to answer
     if [ $answer != yes ] && [ $answer != y ]  && [ $answer != no ] && [ $answer != n ]; then
         echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
@@ -28,6 +33,7 @@ if [ $osrelease == '"rocky"' ]; then
         read answer
     fi
 
+    #tests answer and begins installing
     if [ $answer == yes ] || [ $answer == y ]; then
 
         #upgrade operating system
@@ -90,6 +96,7 @@ if [ $osrelease == '"rocky"' ]; then
         echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9) "
         read fw
 
+        #tests the value of the variable fw against acceptable values
         if [ $fw != yes ] && [ $fw != y ]  && [ $fw != no ] && [ $fw != n ]; then
         echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
 
@@ -99,6 +106,7 @@ if [ $osrelease == '"rocky"' ]; then
         read fw
         fi
         
+        #creates or doesn't create firewall rules based on the fw variable value
         if [ $fw == no ] || [ $fw == n ]; then
         firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address="$ip" accept"; firewall-cmd --permanent --zone=public --remove-service=cockpit; firewall-cmd --reload
         fi
@@ -351,6 +359,7 @@ else
     echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9) "
     read answer
     
+    #checks for answer spelling; if spelling is incorrect the operator is informed and given another chance to answer
     if [ $answer != yes ] && [ $answer != y ]  && [ $answer != no ] && [ $answer != n ]; then
         echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
     
@@ -360,6 +369,7 @@ else
         read answer
     fi  
 
+    #tests answer and begins installing
     if [ $answer == yes ] || [  $answer == y ]; then
 
         #upgrade operating system
@@ -422,6 +432,7 @@ else
         echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9) "
         read fw
 
+        #tests the value of the variable fw against acceptable values
         if [ $fw != yes ] && [ $fw != y ]  && [ $fw != no ] && [ $fw != n ]; then
         echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
 
@@ -431,6 +442,7 @@ else
         read fw
         fi
         
+        #creates or doesn't create firewall rules based on the fw variable value
         if [ $fw == no ] || [ $fw == n ]; then
         firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address="$ip" accept"; firewall-cmd --reload
         fi
