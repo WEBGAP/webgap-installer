@@ -20,7 +20,7 @@ fi
 #if the operating system ID is rocky you get these commands and questions
 if [ $osrelease == '"rocky"' ]; then
 
-    echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9) "
+    echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9)"
     read answer
 
     #checks for answer spelling; if spelling is incorrect the operator is informed and given another chance to answer
@@ -29,7 +29,7 @@ if [ $osrelease == '"rocky"' ]; then
         
         sleep 2
 
-        echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9) "
+        echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9)"
         read answer
     fi
 
@@ -89,7 +89,7 @@ if [ $osrelease == '"rocky"' ]; then
         sed -i 's/AllowZoneDrifting=yes/AllowZoneDrifting=no/' /etc/firewalld/firewalld.conf
 
         #ask for public IP
-        echo "$(tput setaf 3)What is the IP address assigned to the host network interface?$(tput setaf 9) "
+        echo "$(tput setaf 3)What is the IP address assigned to the host network interface?$(tput setaf 9)"
         read ip
 
         #tests IPv4 address validity
@@ -103,7 +103,7 @@ if [ $osrelease == '"rocky"' ]; then
         fi
 
         #GCP sets the trusted zone active which accepts all packets, no rules needed
-        echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9) "
+        echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9)"
         read fw
 
         #tests the value of the variable fw against acceptable values
@@ -112,7 +112,7 @@ if [ $osrelease == '"rocky"' ]; then
 
         sleep 2
 
-        echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9) "
+        echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9)"
         read fw
         fi
         
@@ -154,9 +154,9 @@ if [ $osrelease == '"rocky"' ]; then
         docker run -d -e EXTERNAL_IP=$ip --name=turnserver --restart=always --net=host -p 3478:3478 -p 3478:3478/udp jyangnet/turnserver
 
         #capture user input for the domain and subdomain to be used for front-end and administration respectively
-        echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9) "
+        echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9)"
         read domain
-        echo "$(tput setaf 3)Which sudomain would you like to use to access the administration panel?$(tput setaf 9) "
+        echo "$(tput setaf 3)Which sudomain would you like to use to access the administration panel?$(tput setaf 9)"
         read subdomain
 
         #replace & with variable values for the domain and subdomain in the nginx conf files
@@ -269,7 +269,7 @@ if [ $osrelease == '"rocky"' ]; then
         sed -i 's/AllowZoneDrifting=yes/AllowZoneDrifting=no/' /etc/firewalld/firewalld.conf
 
         #ask for public IP to create firewalld rich rules and close database port
-        echo "$(tput setaf 3)What is the IP address assigned to the host network interface?$(tput setaf 9) "
+        echo "$(tput setaf 3)What is the IP address assigned to the host network interface?$(tput setaf 9)"
         read ip
 
         #tests IPv4 address validity
@@ -314,9 +314,9 @@ if [ $osrelease == '"rocky"' ]; then
         docker run -d  EXTERNAL_IP=$ip --name=turnserver --restart=always --net=host -p 3478:3478 -p 3478:3478/udp jyangnet/turnserver
 
         #capture user input for the domain and subdomain to be used for front-end and administration respectively
-        echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9) "
+        echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9)"
         read domain
-        echo "$(tput setaf 3)Which sudomain would you like to use to access the administration panel?$(tput setaf 9) "
+        echo "$(tput setaf 3)Which sudomain would you like to use to access the administration panel?$(tput setaf 9)"
         read subdomain
 
         #replace & with variable values for the domain and subdomain in the nginx conf files
@@ -377,7 +377,7 @@ if [ $osrelease == '"rocky"' ]; then
 
 else
 
-    echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9) "
+    echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9)"
     read answer
     
     #checks for answer spelling; if spelling is incorrect the operator is informed and given another chance to answer
@@ -386,7 +386,7 @@ else
     
         sleep 2
 
-        echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9) "
+        echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9)"
         read answer
     fi  
 
@@ -446,7 +446,7 @@ else
         sed -i 's/AllowZoneDrifting=yes/AllowZoneDrifting=no/' /etc/firewalld/firewalld.conf
 
         #ask for public IP
-        echo "$(tput setaf 3)What is the IP address assigned to the host network interface?$(tput setaf 9) "
+        echo "$(tput setaf 3)What is the IP address assigned to the host network interface?$(tput setaf 9)"
         read ip
 
         #tests IPv4 address validity
@@ -460,7 +460,7 @@ else
         fi
 
         #GCP sets the trusted zone active which accepts all packets, no rules needed
-        echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9) "
+        echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9)"
         read fw
 
         #tests the value of the variable fw against acceptable values
@@ -469,7 +469,7 @@ else
 
         sleep 2
 
-        echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9) "
+        echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9)"
         read fw
         fi
         
@@ -511,9 +511,9 @@ else
         docker run -d -e EXTERNAL_IP=$ip --name=turnserver --restart=always --net=host -p 3478:3478 -p 3478:3478/udp jyangnet/turnserver
 
         #capture user input for the domain and subdomain to be used for front-end and administration respectively
-        echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9) "
+        echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9)"
         read domain
-        echo "$(tput setaf 3)Which sudomain would you like to use to access the administration panel?$(tput setaf 9) "
+        echo "$(tput setaf 3)Which sudomain would you like to use to access the administration panel?$(tput setaf 9)"
         read subdomain
 
         #replace & with variable values for the domain and subdomain in the nginx conf files
@@ -626,7 +626,7 @@ else
         sed -i 's/AllowZoneDrifting=yes/AllowZoneDrifting=no/' /etc/firewalld/firewalld.conf
 
         #ask for public IP to create firewalld rich rules and close database port
-        echo "$(tput setaf 3)What is the IP address assigned to the host network interface?$(tput setaf 9) "
+        echo "$(tput setaf 3)What is the IP address assigned to the host network interface?$(tput setaf 9)"
         read ip
 
         #tests IPv4 address validity
@@ -674,9 +674,9 @@ else
         docker run -d -e EXTERNAL_IP=$ip --name=turnserver --restart=always --net=host -p 3478:3478 -p 3478:3478/udp jyangnet/turnserver
 
         #capture user input for the domain and subdomain to be used for front-end and administration respectively
-        echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9) "
+        echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9)"
         read domain
-        echo "$(tput setaf 3)Which sudomain would you like to use to access the administration panel?$(tput setaf 9) "
+        echo "$(tput setaf 3)Which sudomain would you like to use to access the administration panel?$(tput setaf 9)"
         read subdomain
 
         #replace & with variable values for the domain and subdomain in the nginx conf files
