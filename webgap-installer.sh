@@ -327,7 +327,7 @@ if [ $osrelease == '"rocky"' ]; then
         snap install --classic certbot 
         ln -s /snap/bin/certbot /usr/bin/certbot
 
-        #download webmirror package
+        #download safeweb package
         wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1rANxv6TJwyZQpxwUvzCz-oqCTdDdugXg' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1rANxv6TJwyZQpxwUvzCz-oqCTdDdugXg" -O /opt/webgap-deployment-20210921.tgz && rm -rf /tmp/cookies.txt
 
         #untar safeweb package
