@@ -10,7 +10,7 @@ fi
 osrelease=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
 
 #if the operating system ID isn't rocky nor centos the script exits after displaying a message
-if [ $osrelease != '"rocky"' ] && [ $osrelease != '"centos"' ]; then
+if [ "$osrelease" != '"rocky"' ] && [ "$osrelease" != '"centos"' ]; then
     echo "$(tput setaf 3)Please install on CentOS 7 or Rocky 8. You are trying to install on $(tput bold)$osrelease.$(tput setaf 9)"
 
     sleep 2
@@ -18,13 +18,13 @@ if [ $osrelease != '"rocky"' ] && [ $osrelease != '"centos"' ]; then
 fi
 
 #if the operating system ID is rocky you get these commands and questions
-if [ $osrelease == '"rocky"' ]; then
+if [ "$osrelease" == '"rocky"' ]; then
 
     echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9)"
     read answer
 
     #checks for answer spelling; if spelling is incorrect the operator is informed and given another chance to answer
-    if [ $answer != yes ] && [ $answer != y ]  && [ $answer != no ] && [ $answer != n ]; then
+    if [ "$answer" != yes ] && [ "$answer" != y ]  && [ "$answer" != no ] && [ "$answer" != n ]; then
         echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
         sleep 2
@@ -34,7 +34,7 @@ if [ $osrelease == '"rocky"' ]; then
     fi
 
     #tests answer and begins installing
-    if [ $answer == yes ] || [ $answer == y ]; then
+    if [ "$answer" == yes ] || [ "$answer" == y ]; then
 
         #upgrade operating system
         yum makecache
@@ -107,7 +107,7 @@ if [ $osrelease == '"rocky"' ]; then
         read fw
 
         #tests the value of the variable fw against acceptable values
-        if [ $fw != yes ] && [ $fw != y ]  && [ $fw != no ] && [ $fw != n ]; then
+        if [ "$fw" != yes ] && [ "$fw" != y ]  && [ "$fw" != no ] && [ "$fw" != n ]; then
         echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
 
         sleep 2
@@ -117,7 +117,7 @@ if [ $osrelease == '"rocky"' ]; then
         fi
         
         #creates or doesn't create firewall rules based on the fw variable value
-        if [ $fw == no ] || [ $fw == n ]; then
+        if [ "$fw" == no ] || [ "$fw" == n ]; then
         firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address="$ip" accept"; firewall-cmd --permanent --zone=public --remove-service=cockpit; firewall-cmd --reload
         fi
 
@@ -159,7 +159,7 @@ if [ $osrelease == '"rocky"' ]; then
         echo "$(tput setaf 3)Is $domain the correct spelling (yes/no)?$(tput setaf 9)" 
         read reply
 
-        if [ $reply != yes ] && [ $reply != y ]  && [ $reply != no ] && [ $reply != n ]; then
+        if [ "$reply" != yes ] && [ "$reply" != y ]  && [ "$reply" != no ] && [ "$reply" != n ]; then
             echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
             sleep 2
@@ -168,7 +168,7 @@ if [ $osrelease == '"rocky"' ]; then
             read reply
         fi
 
-        if [ $reply == no ] || [ $reply == n ]; then
+        if [ "$reply" == no ] || [ "$reply" == n ]; then
             echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9)"
             read domain
         fi
@@ -178,7 +178,7 @@ if [ $osrelease == '"rocky"' ]; then
         echo "$(tput setaf 3)Is $subdomain the correct spelling (yes/no)?$(tput setaf 9)"
         read reply
 
-        if [ $reply != yes ] && [ $reply != y ]  && [ $reply != no ] && [ $reply != n ]; then
+        if [ "$reply" != yes ] && [ "$reply" != y ]  && [ "$reply" != no ] && [ "$reply" != n ]; then
             echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
             sleep 2
@@ -187,7 +187,7 @@ if [ $osrelease == '"rocky"' ]; then
             read reply
         fi
 
-        if [ $reply == no ] || [ $reply == n ]; then
+        if [ "$reply" == no ] || [ "$reply" == n ]; then
             echo "$(tput setaf 3)Which domain name would you like to use to access the administration panel?$(tput setaf 9)"
             read subdomain
         fi
@@ -352,7 +352,7 @@ if [ $osrelease == '"rocky"' ]; then
         echo "$(tput setaf 3)Is $domain the correct spelling (yes/no)?$(tput setaf 9)" 
         read reply
 
-        if [ $reply != yes ] && [ $reply != y ]  && [ $reply != no ] && [ $reply != n ]; then
+        if [ "$reply" != yes ] && [ "$reply" != y ]  && [ "$reply" != no ] && [ "$reply" != n ]; then
             echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
             sleep 2
@@ -361,7 +361,7 @@ if [ $osrelease == '"rocky"' ]; then
             read reply
         fi
 
-        if [ $reply == no ] || [ $reply == n ]; then
+        if [ "$reply" == no ] || [ "$reply" == n ]; then
             echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9)"
             read domain
         fi
@@ -371,7 +371,7 @@ if [ $osrelease == '"rocky"' ]; then
         echo "$(tput setaf 3)Is $subdomain the correct spelling (yes/no)?$(tput setaf 9)"
         read reply
 
-        if [ $reply != yes ] && [ $reply != y ]  && [ $reply != no ] && [ $reply != n ]; then
+        if [ "$reply" != yes ] && [ "$reply" != y ]  && [ "$reply" != no ] && [ "$reply" != n ]; then
             echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
             sleep 2
@@ -380,7 +380,7 @@ if [ $osrelease == '"rocky"' ]; then
             read reply
         fi
 
-        if [ $reply == no ] || [ $reply == n ]; then
+        if [ "$reply" == no ] || [ "$reply" == n ]; then
             echo "$(tput setaf 3)Which domain name would you like to use to access the administration panel?$(tput setaf 9)"
             read subdomain
         fi
@@ -447,7 +447,7 @@ else
     read answer
     
     #checks for answer spelling; if spelling is incorrect the operator is informed and given another chance to answer
-    if [ $answer != yes ] && [ $answer != y ]  && [ $answer != no ] && [ $answer != n ]; then
+    if [ "$answer" != yes ] && [ "$answer" != y ]  && [ "$answer" != no ] && [ "$answer" != n ]; then
         echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
     
         sleep 2
@@ -457,7 +457,7 @@ else
     fi  
 
     #tests answer and begins installing
-    if [ $answer == yes ] || [  $answer == y ]; then
+    if [ "$answer" == yes ] || [  "$answer" == y ]; then
 
         #upgrade operating system
         yum makecache fast
@@ -530,7 +530,7 @@ else
         read fw
 
         #tests the value of the variable fw against acceptable values
-        if [ $fw != yes ] && [ $fw != y ]  && [ $fw != no ] && [ $fw != n ]; then
+        if [ "$fw" != yes ] && [ "$fw" != y ]  && [ "$fw" != no ] && [ "$fw" != n ]; then
         echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
 
         sleep 2
@@ -540,7 +540,7 @@ else
         fi
         
         #creates or doesn't create firewall rules based on the fw variable value
-        if [ $fw == no ] || [ $fw == n ]; then
+        if [ "$fw" == no ] || [ "$fw" == n ]; then
         firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address="$ip" accept"; firewall-cmd --reload
         fi
 
@@ -582,7 +582,7 @@ else
         echo "$(tput setaf 3)Is $domain the correct spelling (yes/no)?$(tput setaf 9)" 
         read reply
 
-        if [ $reply != yes ] && [ $reply != y ]  && [ $reply != no ] && [ $reply != n ]; then
+        if [ "$reply" != yes ] && [ "$reply" != y ]  && [ "$reply" != no ] && [ "$reply" != n ]; then
             echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
             sleep 2
@@ -591,7 +591,7 @@ else
             read reply
         fi
 
-        if [ $reply == no ] || [ $reply == n ]; then
+        if [ "$reply" == no ] || [ "$reply" == n ]; then
             echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9)"
             read domain
         fi
@@ -601,7 +601,7 @@ else
         echo "$(tput setaf 3)Is $subdomain the correct spelling (yes/no)?$(tput setaf 9)"
         read reply
 
-        if [ $reply != yes ] && [ $reply != y ]  && [ $reply != no ] && [ $reply != n ]; then
+        if [ "$reply" != yes ] && [ "$reply" != y ]  && [ "$reply" != no ] && [ "$reply" != n ]; then
             echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
             sleep 2
@@ -610,7 +610,7 @@ else
             read reply
         fi
 
-        if [ $reply == no ] || [ $reply == n ]; then
+        if [ "$reply" == no ] || [ "$reply" == n ]; then
             echo "$(tput setaf 3)Which domain name would you like to use to access the administration panel?$(tput setaf 9)"
             read subdomain
         fi
@@ -778,7 +778,7 @@ else
         echo "$(tput setaf 3)Is $domain the correct spelling (yes/no)?$(tput setaf 9)" 
         read reply
 
-        if [ $reply != yes ] && [ $reply != y ]  && [ $reply != no ] && [ $reply != n ]; then
+        if [ "$reply" != yes ] && [ "$reply" != y ]  && [ "$reply" != no ] && [ "$reply" != n ]; then
             echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
             sleep 2
@@ -787,7 +787,7 @@ else
             read reply
         fi
 
-        if [ $reply == no ] || [ $reply == n ]; then
+        if [ "$reply" == no ] || [ "$reply" == n ]; then
             echo "$(tput setaf 3)Which domain name would you like to use to access the front-end?$(tput setaf 9)"
             read domain
         fi
@@ -797,7 +797,7 @@ else
         echo "$(tput setaf 3)Is $subdomain the correct spelling (yes/no)?$(tput setaf 9)"
         read reply
 
-        if [ $reply != yes ] && [ $reply != y ]  && [ $reply != no ] && [ $reply != n ]; then
+        if [ "$reply" != yes ] && [ "$reply" != y ]  && [ "$reply" != no ] && [ "$reply" != n ]; then
             echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
         
             sleep 2
@@ -806,7 +806,7 @@ else
             read reply
         fi
 
-        if [ $reply == no ] || [ $reply == n ]; then
+        if [ "$reply" == no ] || [ "$reply" == n ]; then
             echo "$(tput setaf 3)Which domain name would you like to use to access the administration panel?$(tput setaf 9)"
             read subdomain
         fi
