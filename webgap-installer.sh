@@ -45,6 +45,7 @@ if [ "$osrelease" == '"Rocky Linux"' ]; then
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
     #install docker-ce and nginx
+    yum -y remove runc
     yum -y install docker-ce nginx
 
     #change boolean operators for nginx to allow memory execution, network connection establishment
