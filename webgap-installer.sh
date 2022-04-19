@@ -248,10 +248,10 @@ if [ "$osrelease" == '"Rocky Linux"' ]; then
     #run certbot twice - once for the front-end domain and once for the administration domain
     echo "$(tput setaf 3)Certbot is going to run for the front-end. Select only number 1.$(tput setaf 9)"
     sleep 3s
-    certbot certonly --nginx --test-cert --preferred-challenges http
+    certbot certonly --nginx --preferred-challenges http
     echo "$(tput setaf 3)Certbot is going to run for the administration panel. Select only number 2.$(tput setaf 9)"
     sleep 3s
-    certbot certonly --nginx --test-cert --preferred-challenges http
+    certbot certonly --nginx --preferred-challenges http
 
     #uncomment front-end nginx conf lines
     sed -i '2 s/#//' /etc/nginx/conf.d/default.conf
@@ -498,10 +498,10 @@ elif [ "$osrelease1" == '"CentOS-7"' ]; then
     #run certbot twice - once for the front-end domain and once for the administration domain
     echo "$(tput setaf 3)Certbot is going to run for the front-end. Please select only number 1.$(tput setaf 9)"
     sleep 3s
-    certbot certonly --nginx --test-cert --preferred-challenges http
+    certbot certonly --nginx --preferred-challenges http
     echo "$(tput setaf 3)Certbot is going to run for the administration panel. Please select only number 2.$(tput setaf 9)"
     sleep 3s
-    certbot certonly --nginx --test-cert --preferred-challenges http
+    certbot certonly --nginx --preferred-challenges http
 
     #uncomment front-end nginx conf lines
     sed -i '2 s/#//' /etc/nginx/conf.d/default.conf
@@ -734,10 +734,10 @@ else
     #run certbot twice - once for the front-end domain and once for the administration domain
     echo "$(tput setaf 3)Certbot is going to run for the front-end. Select only number 1.$(tput setaf 9)"
     sleep 3s
-    certbot certonly --nginx --test-cert --preferred-challenges http
+    certbot certonly --nginx --preferred-challenges http
     echo "$(tput setaf 3)Certbot is going to run for the administration panel. Select only number 2.$(tput setaf 9)"
     sleep 3s
-    certbot certonly --nginx --test-cert --preferred-challenges http
+    certbot certonly --nginx --preferred-challenges http
 
     #uncomment front-end nginx conf lines
     sed -i '2 s/#//' /etc/nginx/conf.d/default.conf
