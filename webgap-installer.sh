@@ -205,7 +205,7 @@ if [ "$osrelease" == '"Rocky Linux"' ]; then
     fi
 
     #capture input for the domain/subdomain used to access the administration panel
-    echo "$(tput setaf 3)Which domain or sudomain would you like to use to access the administration panel?$(tput setaf 9)"
+    echo "$(tput setaf 3)Which domain or subdomain would you like to use to access the administration panel?$(tput setaf 9)"
     read backend
     echo "$(tput setaf 3)Is $backend the correct spelling (yes/no)?$(tput setaf 9)"
     read reply
