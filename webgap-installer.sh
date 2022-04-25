@@ -591,46 +591,28 @@ else
         read ip
     done   
 
-    #the trusted zone accepts all packets, no rules needed
-    echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9)"
-    read fw
+    #asks about vpc/dmz to add another firewall rule if deployed directly to the internet
+    echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9)"
+    read answer
 
-    #tests the value of the variable fw against acceptable values
-    while [ "$fw" != yes ] && [ "$fw" != y ]  && [ "$fw" != no ] && [ "$fw" != n ]
+    #checks for answer spelling; if spelling is incorrect the operator is informed and given another chance to answer
+    while [ "$answer" != yes ] && [ "$answer" != y ]  && [ "$answer" != no ] && [ "$answer" != n ]
         do echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
-
+    
         sleep 2
 
-        echo "$(tput setaf 3)Is your firewall active zone the Trusted zone (yes/no)?$(tput setaf 9)"
-        read fw
-    done
-
-    #asks about vpc/dmz to add another firewall rule if deployed directly to the internet
-    if [ "$fw" == no ] || [ "$fw" == n ]; then
         echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9)"
         read answer
-
-        #checks for answer spelling; if spelling is incorrect the operator is informed and given another chance to answer
-        while [ "$answer" != yes ] && [ "$answer" != y ]  && [ "$answer" != no ] && [ "$answer" != n ]
-            do echo "$(tput setaf 3)Please answer with yes or no.$(tput setaf 9)"
-        
-            sleep 2
-
-            echo "$(tput setaf 3)Are you deploying in a virtual private cloud or DMZ (yes/no)?$(tput setaf 9)"
-            read answer
-        done
-    fi
-
+    done
+    
     #creates firewall rule if no vpc/dmz
     if [ "$answer" == no ] || [ "$answer" == n ]; then
         firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" port port="3306" protocol="tcp" drop'; firewall-cmd --reload
     fi 
             
-    #creates or doesn't create firewall rules based on the fw variable value
-    if [ "$fw" == no ] || [ "$fw" == n ]; then
-        firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address=""$ip"" accept"; firewall-cmd --reload
-    fi
-
+    #creates firewall rules
+    firewall-cmd --permanent --zone=public --add-service=https; firewall-cmd --permanent --zone=public --add-service=http; firewall-cmd --permanent --zone=public --add-port=8001/tcp; firewall-cmd --permanent --zone=public --add-port=3478/tcp; firewall-cmd --permanent --zone=public --add-port=3478/udp; firewall-cmd --permanent --zone=public --add-rich-rule="rule family=ipv4 source address=""$ip"" accept"; firewall-cmd --reload
+    
     #restart snapd service for proper seeding before installation of certbot, install snap core and certbot
     systemctl restart snapd.seeded.service; snap install core; snap install --classic certbot; ln -s /snap/bin/certbot /usr/bin/certbot
 
