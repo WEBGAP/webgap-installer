@@ -530,7 +530,7 @@ elif [ "$osrelease1" == '"CentOS-7"' ]; then
     sed -i "5 s/SERVER_IP=66.160.146.247/SERVER_IP=$ip/" /opt/deployment/safeweb.conf
 
 ##ubuntu command block##
-elif [ "$osrelease2" != focal ]; then
+elif [ "$osrelease2" == focal ]; then
    
     #switch ufw for firewalld
     systemctl stop ufw; apt -y remove ufw; apt -y install firewalld; systemctl enable --now firewalld
