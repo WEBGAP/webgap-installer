@@ -58,7 +58,7 @@ if [ "$osrelease" == '"Rocky Linux"' ]; then
     systemctl enable nginx
 
     #download nginx configuration template
-    wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Jw_CcvIqatMn3WVkUI2uMTe3g7WLb58v' -O /etc/nginx/conf.d/default.conf
+    wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1LvBkDht1L6PbiMQAQQPNaZot-6yXD_A-' -O /etc/nginx/conf.d/default.conf
 
     #download docker compose
     curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -308,7 +308,7 @@ elif [ "$osrelease1" == '"CentOS-7"' ]; then
     systemctl enable nginx
 
     #download nginx configuration template
-    wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Jw_CcvIqatMn3WVkUI2uMTe3g7WLb58v' -O /etc/nginx/conf.d/default.conf
+    wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1LvBkDht1L6PbiMQAQQPNaZot-6yXD_A-' -O /etc/nginx/conf.d/default.conf
 
     #download docker compose
     curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -566,7 +566,7 @@ elif [ "$osrelease2" == focal ]; then
     curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose; chmod +x /usr/local/bin/docker-compose; ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
     #download nginx configuration template
-    wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1Jw_CcvIqatMn3WVkUI2uMTe3g7WLb58v' -O /etc/nginx/conf.d/default.conf
+    wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1LvBkDht1L6PbiMQAQQPNaZot-6yXD_A-' -O /etc/nginx/conf.d/default.conf
 
     #create user docker and add to group docker
     useradd -g docker docker
